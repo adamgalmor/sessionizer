@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} app
+  p You can (ATM only) send the query params: name and age to the collect api e.g:
+  <a href="http://localhost:3000/collect?name=adam13&age=31">/collect?name=adam&age=31</a>
+  p This will create a session ID in mongodb for 5 minutes, after 5 minutes you will get a new session ID.
