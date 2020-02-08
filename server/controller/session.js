@@ -1,7 +1,7 @@
 var sessionService = require('../service/session');
 var crypto = require('crypto');
 var moment = require('moment');
-var MINUTES_FOR_TTL = 5
+var global = require('../config/global');
 
 var generate_key = function() {
     return crypto.randomBytes(16).toString('base64');
@@ -37,7 +37,7 @@ exports.collect = function (req, res, next) {
 }
 
 var sessionFoundHandler = function(req, res, sessionContext){
-    //if the session expired create a new UID else use the same one, then update the data. (always update the TTL):
+    //if the session expired create a new SID else use the same one, then update the data. (always update the TTL):
     let session = Date.now() > sessionContext.ttl ? new Session(req.query) : new Session(req.query, sessionContext.sessionId);
 
     sessionService.updateSessionById(result.id, session, (err, response) => {
@@ -69,6 +69,6 @@ class Session {
         this.name = queryString.name;
         this.age = queryString.age;
         this.sessionId = sessionId || generate_key();
-        this.ttl = moment().add(MINUTES_FOR_TTL, 'm').toDate();
+        this.ttl = moment().add(global.MINUTES_FOR_TTL, 'm').toDate();
     }
 }
