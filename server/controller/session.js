@@ -40,7 +40,7 @@ var sessionFoundHandler = function(req, res, sessionContext){
     //if the session expired create a new SID else use the same one, then update the data. (always update the TTL):
     let session = Date.now() > sessionContext.ttl ? new Session(req.query) : new Session(req.query, sessionContext.sessionId);
 
-    sessionService.updateSessionById(result.id, session, (err, response) => {
+    sessionService.updateSessionById(sessionContext.id, session, (err, response) => {
         if (response) {
             res.cookie('sessionId', session.sessionId, { expires: session.ttl, httpOnly: true });
             res.status(201).send(response);
