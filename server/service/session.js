@@ -2,7 +2,8 @@
     var mongoose = require('mongoose');
     var session = mongoose.model('Session');
     /**
-     * Function to execute the create query to create the sessions.
+     * Function to execute the create query to save the session data in MongoDB.
+     * This is done so that other nodes\proccess can retrieve an manipulate sessions accross the swarm
      * @param {*} data session data
      * @param {*} callback callback function.
      */

@@ -51,7 +51,7 @@ var sessionFoundHandler = function(req, res, sessionContext){
 }
 
 var sessionNotFoundHandler = function(req, res){
-    //create a new UID, save the data and send the client a coockie with the UID
+    //create a new SID, save the data and send the client a coockie with the SID
     let session = new Session(req.query);
     
     sessionService.collectSession(session, function (error, response) {
@@ -67,7 +67,7 @@ var sessionNotFoundHandler = function(req, res){
 class Session {
     constructor(queryStrings, sessionId) {
         this.data = queryStrings;
-        this.sessionId = sessionId || generate_key();
-        this.ttl = moment().add(global.MINUTES_FOR_TTL, 'm').toDate();
+        this.sessionId = sessionId || generate_key(); //if the current SID is present use it, else generate a new SID
+        this.ttl = moment().add(global.MINUTES_FOR_TTL, 'm').toDate(); //on every reqeust the server recieves, the session TTL is updated
     }
 }
