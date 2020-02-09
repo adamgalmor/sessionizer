@@ -56,7 +56,7 @@ var sessionNotFoundHandler = function(req, res){
     
     sessionService.collectSession(session, function (error, response) {
         if (response) {
-            res.cookie('sessionId',session.sessionId, { maxAge: session.ttl, httpOnly: true });
+            res.cookie('sessionId',session.sessionId, { expires: session.ttl, httpOnly: true });
             res.status(201).send(response);
         } else if (error) {
             res.status(400).send(error);
