@@ -4,9 +4,6 @@ var schema = new mongoose.Schema({
     data: {
         type: Object
     },
-    age: {
-        type: Number
-    },
     sessionId: {
         type: String
     },

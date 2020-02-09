@@ -65,9 +65,8 @@ var sessionNotFoundHandler = function(req, res){
 }
 
 class Session {
-    constructor(queryString, sessionId) {
-        this.name = queryString.name;
-        this.age = queryString.age;
+    constructor(queryStrings, sessionId) {
+        this.data = queryStrings;
         this.sessionId = sessionId || generate_key();
         this.ttl = moment().add(global.MINUTES_FOR_TTL, 'm').toDate();
     }
