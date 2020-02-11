@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var session = mongoose.model('Session');
+const mongoose = require('mongoose');
+const session = mongoose.model('Session');
 
 module.exports = {
     collectSession,

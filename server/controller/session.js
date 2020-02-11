@@ -1,9 +1,9 @@
-var sessionService = require('../service/session');
-var crypto = require('crypto');
-var moment = require('moment');
-var global = require('../config/global');
+const sessionService = require('../service/session');
+const crypto = require('crypto');
+const moment = require('moment');
+const global = require('../config/global');
 
-var generate_key = function() {
+const generate_key = function() {
     return crypto.randomBytes(16).toString('base64');
 };
 
@@ -36,19 +36,19 @@ exports.collect = (req, res) => {
 
 }
 
-var sessionFoundHandler = (req, res, sessionContext) => {
+const sessionFoundHandler = (req, res, sessionContext) => {
     //if the session expired create a new SID else use the same one, then update the data. (always update the TTL):
     let session = Date.now() > sessionContext.ttl ? new Session(req.query) : new Session(req.query, sessionContext.sessionId);
 
     sessionService.updateSessionById(sessionContext.id, session).then(result => {
         res.cookie('sessionId', session.sessionId, { expires: session.ttl, httpOnly: true });
-        res.status(201).send(result);        
+        res.status(201).send(session);        
     }).catch(error => {
         res.status(400).send(error);
     });
 }
 
-var sessionNotFoundHandler = (req, res) => {
+const sessionNotFoundHandler = (req, res) => {
     //create a new SID, save the data and send the client a coockie with the SID
     let session = new Session(req.query);
     

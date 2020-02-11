@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     data: {
         type: Object
     },
@@ -12,6 +12,6 @@ var schema = new mongoose.Schema({
     }
 });
 
-var session = new mongoose.model('Session', schema);
+const session = new mongoose.model('Session', schema);
 
 module.exports = session;

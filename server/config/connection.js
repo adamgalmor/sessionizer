@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var URL = process.env.URL || 'mongodb://localhost/SESSIONS_DB';
+const mongoose = require('mongoose');
+const URL = process.env.URL || 'mongodb://localhost/SESSIONS_DB';
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useUnifiedTopology', true);
@@ -9,7 +9,7 @@ mongoose.connect(URL, {
     useCreateIndex: true
 });
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', () => {
     console.error('Error occured in db connection');
